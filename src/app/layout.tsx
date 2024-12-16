@@ -2,17 +2,13 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import SupabaseProvider from "../../providers/SupabaseProvider";
+import UserProvider from "../../providers/UserProvider";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+</style>
+
+
 
 export const metadata: Metadata = {
   title: "Target Tracker",
@@ -27,11 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <SupabaseProvider>
-      <body
-        className={`antialiased`}
-      >
-        {children}
-      </body>
+        <UserProvider>
+            <body>
+              {children}
+            </body>
+        </UserProvider>
       </SupabaseProvider>
     </html>
   );

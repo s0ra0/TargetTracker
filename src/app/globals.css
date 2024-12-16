@@ -8,9 +8,18 @@ body,
   height: 100%;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+@font-face {
+  font-family: "El Messiri" ;
+  src: 
+       url("./fonts/ElMessiri-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
+
+body {
+  font-family: "El Messiri", serif;
+}
+
 
 @layer base {
   :root {
