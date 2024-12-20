@@ -18,6 +18,7 @@ import { useUser } from "../../../../hooks/useUser";
 import { useAuthModal } from "../../../../hooks/useAuthModal";
 import { toast } from 'react-hot-toast';
 import { twMerge } from 'tailwind-merge';
+import ProfileButton from '@/components/ProfileButton';
 
 interface AuthProps {
     setState: (state: AuthFlow) => void;
@@ -35,7 +36,6 @@ export const AuthScreen = ({ setState }: AuthProps) => {
 
     const handleLogout = async () => {
         const { error } = await supabaseClient.auth.signOut();
-    
 
         if (error) {
             toast.error(error.message);
@@ -43,20 +43,12 @@ export const AuthScreen = ({ setState }: AuthProps) => {
             toast.success('Logged out!');
           }
         };
-        
-        return (
-        <div
-            className="   
 
-            "
-        >
+        return (
+        <div>
             { user?(
                     <div>
-                        <Button onClick={handleLogout} className="bg-black px-6 py-2">
-                            Logout
-                        </Button>
-                        <Button onClick={() => router.push('/account')} className="bg-black">
-                        </Button>
+                        <ProfileButton/>
                     </div>
                 ):(
                 <>
