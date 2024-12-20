@@ -47,10 +47,7 @@ export const AuthScreen = ({ setState }: AuthProps) => {
         return (
         <div
             className="   
-            h-screen 
-            flex
-            items-center 
-            justify-center
+
             "
         >
             { user?(
@@ -63,46 +60,53 @@ export const AuthScreen = ({ setState }: AuthProps) => {
                     </div>
                 ):(
                 <>
-                <Card className="w-500 p-8">
-                    <CardHeader className="px-0 pt-0">
-                        <CardTitle className="w-full h-full">
-                            Welcome!
-                        </CardTitle>
-                        <CardDescription>
-                            Use your email or another service to continue
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-5 px-0 pb-0">
-                        <Auth
-                            providers={["github"]}
-                            magicLink
-                            supabaseClient={supabaseClient}
-                            appearance={{
-                                theme: ThemeSupa,
-                                variables: {
-                                    default: {
-                                        colors: {
-                                            brand: "#222222",
-                                            brandAccent: "#424242",
-                                        },
-                                        fonts: {
-                                            bodyFontFamily: "El Messiri",
-                                            buttonFontFamily: "El Messiri",
-                                            inputFontFamily: "El Messiri",
-                                            labelFontFamily: "El Messiri",
-                                        },
-                                        radii: {
-                                            borderRadiusButton: '8px',
-                                            buttonBorderRadius: '8px',
-                                            inputBorderRadius: '8px',
-                                        },
+                <div className='
+                        h-screen 
+                        flex
+                        items-center 
+                        justify-center'
+                >
+                    <Card className="w-500 p-8">
+                        <CardHeader className="px-0 pt-0">
+                            <CardTitle className="w-full h-full">
+                                Welcome!
+                            </CardTitle>
+                            <CardDescription>
+                                Use your email or another service to continue
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-5 px-0 pb-0">
+                            <Auth
+                                providers={["github"]}
+                                magicLink
+                                supabaseClient={supabaseClient}
+                                appearance={{
+                                    theme: ThemeSupa,
+                                    variables: {
+                                        default: {
+                                            colors: {
+                                                brand: "#222222",
+                                                brandAccent: "#424242",
+                                            },
+                                            fonts: {
+                                                bodyFontFamily: "El Messiri",
+                                                buttonFontFamily: "El Messiri",
+                                                inputFontFamily: "El Messiri",
+                                                labelFontFamily: "El Messiri",
+                                            },
+                                            radii: {
+                                                borderRadiusButton: '8px',
+                                                buttonBorderRadius: '8px',
+                                                inputBorderRadius: '8px',
+                                            },
+                                        }
                                     }
-                                }
-                            }}
+                                }}
 
-                        />
-                    </CardContent>
-                </Card>
+                            />
+                        </CardContent>
+                    </Card>
+                </div>
             </>
             )}
         </div>
