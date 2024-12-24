@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@/components/ui/button';
 import { Auth } from "@supabase/auth-ui-react";
 import {
@@ -17,15 +18,12 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useUser } from "../../../../hooks/useUser";
 import { useAuthModal } from "../../../../hooks/useAuthModal";
 import { toast } from 'react-hot-toast';
+import React, { useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import ProfileButton from '@/components/ProfileButton';
 
 interface AuthProps {
     setState: (state: AuthFlow) => void;
-};
-interface HeaderProps {
-    children: React.ReactNode;
-    className?: string;
 };
 
 export const AuthScreen = ({ setState }: AuthProps) => {
@@ -34,30 +32,32 @@ export const AuthScreen = ({ setState }: AuthProps) => {
     const supabaseClient = useSupabaseClient();
     const { user } = useUser();
 
+    // Слушатель на событие успешной авторизации
+    React.useEffect(() => {
+        if (user) {
+            // После успешной авторизации, перенаправляем на главную страницу
+            router.push('@/page.tsx');  // Убедитесь, что путь правильный
+        }
+    }, [user, router]);
+
     const handleLogout = async () => {
         const { error } = await supabaseClient.auth.signOut();
 
         if (error) {
             toast.error(error.message);
-          } else {
+        } else {
             toast.success('Logged out!');
-          }
-        };
+        }
+    };
 
-        return (
+    return (
         <div>
-            { user?(
-                    <div>
-                        <ProfileButton/>
-                    </div>
-                ):(
-                <>
-                <div className='
-                        h-screen 
-                        flex
-                        items-center 
-                        justify-center'
-                >
+            {user ? (
+                <div className="flex justify-center items-center h-screen">
+                    <ProfileButton/>
+                </div>
+            ) : (
+                <div className='h-screen flex items-center justify-center'>
                     <Card className="w-500 p-8">
                         <CardHeader className="px-0 pt-0">
                             <CardTitle className="w-full h-full">
@@ -94,15 +94,11 @@ export const AuthScreen = ({ setState }: AuthProps) => {
                                         }
                                     }
                                 }}
-
                             />
                         </CardContent>
                     </Card>
                 </div>
-            </>
             )}
         </div>
     );
 };
-
-
